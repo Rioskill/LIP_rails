@@ -19,7 +19,7 @@ module SimonHelper
 
   def find_simon_numbers(from, to)
     numbers = calc_enum(from).take_while { |val| val[1] <= to }.to_a
-    numbers.append(calc(numbers.last[0] + 1))
+    numbers.append(calc(numbers.last[0] + 1)) unless numbers.empty?
     numbers
   end
 end
