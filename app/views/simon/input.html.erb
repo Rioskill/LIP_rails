@@ -4,7 +4,7 @@
   <p style="color: red"><%= message %></p>
 <% end %>
 
-<%= form_with url: 'result', method: :get do |form| %>
+<%= form_with url: 'result', method: :post do |form| %>
 
   <div class="mb-3 row">
     <%= form.label 'Начало интервала:', class: 'col-2 form-label' %>
@@ -21,3 +21,5 @@
   </div>
   <%= form.submit 'Посчитать' %>
 <% end %>
+
+<div id='result-container'></div>

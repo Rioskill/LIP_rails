@@ -1,4 +1,4 @@
 Rails.application.routes.draw do
   root 'simon#input'
-  get 'result', to: 'simon#show'
+  post 'result', to: 'simon#show'
 end

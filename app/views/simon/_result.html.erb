@@ -1,5 +1,6 @@
-<table class="table">
-  <thead>
+<div id='result-container'>
+  <table class="table">
+    <thead>
     <tr>
       <th>x - 1</th>
       <th>x</th>
@@ -7,8 +8,8 @@
       <th>n</th>
       <th>n!</th>
     </tr>
-  </thead>
-  <tbody>
+    </thead>
+    <tbody>
     <% @res.each do |num, fact_source, fact| %>
       <tr>
         <td>
@@ -28,5 +29,6 @@
         </td>
       </tr>
     <% end %>
-  </tbody>
-</table>
+    </tbody>
+  </table>
+</div>
