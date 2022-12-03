@@ -1,0 +1,23 @@
+<h1>Гипотеза Симона</h1>
+
+<% flash.each do |_type, message| %>
+  <p style="color: red"><%= message %></p>
+<% end %>
+
+<%= form_with url: 'result', method: :get do |form| %>
+
+  <div class="mb-3 row">
+    <%= form.label 'Начало интервала:', class: 'col-2 form-label' %>
+    <div class="col-10">
+      <%= form.number_field :start, value: 1 %>
+    </div>
+  </div>
+
+  <div class="mb-3 row">
+    <%= form.label 'Конец интервала:', class: 'col-2 form-label' %>
+    <div class="col-10">
+      <%= form.number_field :end, value: 10 %>
+    </div>
+  </div>
+  <%= form.submit 'Посчитать' %>
+<% end %>

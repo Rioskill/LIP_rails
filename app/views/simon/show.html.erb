@@ -1,0 +1,34 @@
+<h1>Гипотеза Симона</h1>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>x - 1</th>
+      <th>x</th>
+      <th>x + 1</th>
+      <th>n</th>
+      <th>n!</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @res.each do |num, fact_source, fact| %>
+      <tr>
+        <td>
+          <%= num - 1 %>
+        </td>
+        <td>
+          <%= num %>
+        </td>
+        <td>
+          <%= num + 1 %>
+        </td>
+        <td>
+          <%= fact_source %>
+        </td>
+        <td>
+          <%= fact %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
