@@ -7,17 +7,17 @@ class SimonController < ApplicationController
   def input; end
 
   def show
-    # fact_sources = (params[:start].to_i..params[:end].to_i).to_a
-    # factorials = fact_sources.map { |val| Math.gamma(val + 1).to_i }
-
-    # @res = helpers.collect_res(calc_simon_numbers(factorials), fact_sources, factorials)
-
     from = params[:start].to_i
     to = params[:end].to_i
 
     @res = SimonResult.get(from, to)
+  end
 
-    # SimonInterval.create(start: params[:start], end: params[:end])
+  def xml_dump
+    # respond_to do |format|
+    #   format.xml {render xml: SimonInterval.all.map(&:to_xml)}
+    # end
+    render xml: SimonInterval.xml_dump
   end
 
   private

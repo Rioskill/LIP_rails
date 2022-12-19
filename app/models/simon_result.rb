@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# ActiveRecord for results
 class SimonResult < ApplicationRecord
   has_and_belongs_to_many :simon_intervals
 
@@ -8,17 +11,13 @@ class SimonResult < ApplicationRecord
   def self.get(from, to)
     interval = SimonInterval.find_by(start: from, end: to)
 
-    if interval.blank?
-      interval = SimonInterval.create(start: from, end: to)
-    end
+    interval = SimonInterval.create(start: from, end: to) if interval.blank?
 
     results = interval.simon_results
 
-    if results.blank?
-      return generate_simon_numbers(from, to)
-    end
+    return generate_simon_numbers(from, to) if results.blank?
 
-    return results.map { |result| [result.value, result.n_num, result.n_fact]}
+    results.map { |result| [result.value, result.n_num, result.n_fact] }
   end
 
   def self.collect_res(simon_numbers, fact_sources, facts)
@@ -33,16 +32,16 @@ class SimonResult < ApplicationRecord
     numbers = collect_res(calc_simon_numbers(factorials), fact_sources, factorials)
 
     interval = SimonInterval.find_by(start: from, end: to)
+    insert_results_to_interval(interval, numbers)
+    numbers
+  end
 
-    numbers.each do|value, n_num, n_fact|
-      result = find_by(value: value)
-      if result.blank?
-        result = create(value: value, n_num: n_num, n_fact: n_fact)
-      end
+  def self.insert_results_to_interval(interval, numbers)
+    numbers.each do |value, n_num, n_fact|
+      result = find_by(value:)
+      result = create(value:, n_num:, n_fact:) if result.blank?
       interval.simon_results << result
     end
-
-    numbers
   end
 
   def self.calc(val)
@@ -56,14 +55,13 @@ class SimonResult < ApplicationRecord
   end
 
   def self.calc_simon_numbers(factorials)
-    from = factorials.first
     to = factorials.last
 
-    find_simon_numbers(from, to).select { |val| factorials.include? val[1] }
+    find_simon_numbers(to).select { |val| factorials.include? val[1] }
   end
 
-  def self.find_simon_numbers(from, to)
-    numbers = calc_enum(from).take_while { |val| val[1] <= to }.to_a
+  def self.find_simon_numbers(to)
+    numbers = calc_enum(1).take_while { |val| val[1] <= to }.to_a
     numbers.append(calc(numbers.last[0] + 1)) unless numbers.empty?
     numbers
   end
