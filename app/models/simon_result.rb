@@ -12,9 +12,7 @@ class SimonResult < ApplicationRecord
     interval = SimonInterval.find_by(start: from, end: to)
 
     interval = SimonInterval.create(start: from, end: to) if interval.blank?
-
     results = interval.simon_results
-
     return generate_simon_numbers(from, to) if results.blank?
 
     results.map { |result| [result.value, result.n_num, result.n_fact] }

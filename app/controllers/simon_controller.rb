@@ -14,9 +14,6 @@ class SimonController < ApplicationController
   end
 
   def xml_dump
-    # respond_to do |format|
-    #   format.xml {render xml: SimonInterval.all.map(&:to_xml)}
-    # end
     render xml: SimonInterval.xml_dump
   end
 
