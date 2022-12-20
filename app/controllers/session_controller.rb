@@ -2,12 +2,14 @@
 
 # session controller
 class SessionController < ApplicationController
+  def login; end
+
   def authorize
-    user = User.find_by_username(params[:username])
+    user = User.find_by_name(params[:name])
     return redirect_to_login unless user&.authenticate params[:password]
 
     session[:current_user_id] = user.id
-    redirect_to root_path
+    redirect_to input_path
   end
 
   def logout

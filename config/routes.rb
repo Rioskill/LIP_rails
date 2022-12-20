@@ -1,8 +1,9 @@
 Rails.application.routes.draw do
-  get 'session/authorize'
-  get 'session/logout'
+  root 'session#login'
+  post 'authorize', to: 'session#authorize'
+  get 'logout', to: 'session#logout'
   resources :users
-  root 'simon#input'
+  get 'input', to: 'simon#input'
   post 'result', to: 'simon#show'
   get 'simon/xml_dump'
 end

@@ -11,6 +11,17 @@
   </head>
 
   <body>
+  <nav class="navbar navbar-light bg-light">
+    <div class="container-fluid">
+      <a href="/" class="navbar-brand"><h1>Гипотеза Симона</h1></a>
+
+      <% if session[:current_user_id].nil? %>
+        <a class="nav-item" href="<%= root_path %>">login</a>
+      <% else %>
+        <a class="nav-item" href="<%= logout_path %>">logout</a>
+      <% end %>
+    </div>
+  </nav>
     <div class="container mt-3">
       <%= yield %>
     </div>

@@ -3,6 +3,7 @@
 # controller for proving Simon hypothesis
 class SimonController < ApplicationController
   before_action :check_params, only: :show
+  before_action :require_login
 
   def input; end
 
@@ -14,9 +15,6 @@ class SimonController < ApplicationController
   end
 
   def xml_dump
-    # respond_to do |format|
-    #   format.xml {render xml: SimonInterval.all.map(&:to_xml)}
-    # end
     render xml: SimonInterval.xml_dump
   end
 
@@ -36,5 +34,10 @@ class SimonController < ApplicationController
     end
 
     redirect_to_input('Конец интервала должен быть целым неотрицательным числом') unless check_param(params[:end].to_s)
+  end
+
+  def require_login
+    redirect_to root_path if session[:current_user_id].nil?
+    @user = User.find_by(id: session[:current_user_id])
   end
 end
