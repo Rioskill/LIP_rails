@@ -12,12 +12,18 @@ class SimonInterval < ApplicationRecord
       xml.interval do
         xml.start start
         xml.end self.end
-        xml.results do
-          simon_results.all.each do |result|
-            xml.value result.value
-            xml.n_num result.n_num
-            xml.n_fact result.n_fact
-          end
+        xml.parent << results_xml
+      end
+    end.doc.root.to_xml
+  end
+
+  def results_xml
+    Nokogiri::XML::Builder.new do |xml|
+      xml.results do
+        simon_results.all.each do |result|
+          xml.value result.value
+          xml.n_num result.n_num
+          xml.n_fact result.n_fact
         end
       end
     end.doc.root.to_xml
