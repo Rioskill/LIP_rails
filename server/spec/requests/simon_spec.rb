@@ -1,6 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe SimonController, type: :controller do
+  render_views
+
   describe 'GET /show' do
 
     it 'should calculate 4 simon numbers' do
@@ -21,6 +23,15 @@ RSpec.describe SimonController, type: :controller do
     it 'should return error' do
       get :show, params: { start: 1, end: 'b' }
       expect(response.body).to eq('<error_msg>Конец интервала должен быть целым неотрицательным числом</error_msg>')
+    end
+
+    it 'should generate different xmls' do
+      get :show, params: { start: 1, end: 10 }
+      first_xml = response.body
+      get :show, params: { start: 6, end: 10 }
+      second_xml = response.body
+
+      expect(first_xml).not_to eq(second_xml)
     end
   end
 end
