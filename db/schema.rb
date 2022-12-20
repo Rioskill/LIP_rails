@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_12_17_103259) do
+ActiveRecord::Schema[7.0].define(version: 2022_12_19_201246) do
   create_table "simon_intervals", force: :cascade do |t|
     t.integer "start"
     t.integer "end"
@@ -29,6 +29,13 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_17_103259) do
     t.integer "value"
     t.integer "n_num"
     t.integer "n_fact"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "name"
+    t.string "password_digest"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
