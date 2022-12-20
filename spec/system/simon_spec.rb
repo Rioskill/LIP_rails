@@ -39,4 +39,9 @@ RSpec.describe "application", type: :system do
                                                     4, 5, 6, 5, 120,
                                                     8, 9, 10, 6, 720].map(&:to_s))
   end
+
+  it 'should redirect to login' do
+    visit input_path
+    expect(page).to have_current_path root_path
+  end
 end
